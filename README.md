@@ -79,7 +79,7 @@ sudo systemctl restart httpd
 Finish the configuration of the Wordpress
 Customize the site the way that you want with themes, plugins and posts
 
-![alt text](image-1.png)
+![alt text](docs/screenshots/blog.png)
 
 ## 5. Application Load Balancer Creation
 Create a load balancer and select 3 availability zones
@@ -95,7 +95,7 @@ Edit inbound rules for your EC2 instance's Security Group:
   - Remove existing HTTP/HTTPS rules allowing 0.0.0.0/0
   - Add HTTP/HTTPs and set the source as ALB Security Group
 
-![alt text](image.png)
+![alt text](docs/screenshots/loadbalancer.png)
 
 
 ## 6. Adding a custom domain
@@ -160,7 +160,7 @@ define('WP_HOME', 'https://yourdomain.com');
 define('WP_SITEURL', 'https://yourdomain.com');
 
 
-![alt text](image-2.png)
+![alt text](docs/screenshots/domain.png)
 
 
 
