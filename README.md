@@ -21,7 +21,7 @@ This project demonstrates a complete WordPress deployment on AWS infrastructure 
   - Outbound Rules: All traffic
 
 **Connection:**
-ssh -i "key.pem" ec2-user@ip-publico-ec2
+ssh -i "key.pem" ec2-user@public-ip-ec2
 
 
 
