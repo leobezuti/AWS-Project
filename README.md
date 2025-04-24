@@ -3,14 +3,14 @@
 
 
 
-## 📋 Project Overview
+# 📋 Project Overview
 This project demonstrates a complete WordPress deployment on AWS infrastructure using:
 - **EC2** as web servers (Amazon Linux 2)
 - **RDS MySQL** for database
 - **Application Load Balancer** for traffic distribution
 - Proper security group configuration
 
-### 🚀 Deployment Steps
+# 🚀 Deployment Steps
 
 ## 1. EC2 Instance Setup
 **Configuration:**
@@ -26,14 +26,14 @@ ssh -i "chave.pem" ec2-user@ip-publico-ec2
 
 
 ## 2. Web Server Installation
-# Update system and install packages
+### Update system and install packages
 sudo yum update -y
 
-# Install and run Apache
+### Install and run Apache
 sudo yum install -y httpd
 sudo service httpd start
 
-# Install PHP and Database
+### Install PHP and Database
 sudo amazon-linux-extras install php8.2 -y
 sudo amazon-linux-extras install mariadb -y
 sudo systemctl start mariadb
@@ -55,27 +55,27 @@ wget https://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz
 sudo cp -r wordpress/* /var/www/html/
 
-# Add ec2-user to apache group
+### Add ec2-user to apache group
 sudo usermod -a -G apache ec2-user
 
-# Set permissions
+### Set permissions
 sudo chown -R ec2-user:apache /var/www/
 sudo chmod 27755 /var/www/ && find /var/www/ -type d -exec sudo chmod 2775 {} \;
 find /var/www -type f -exec sudo chmod 0664 {} \;
 
-# Database Configuration (wp-config.php)
+### Database Configuration (wp-config.php)
 define('DB_NAME', 'wordpress_db');
 define('DB_USER', 'admin');
 define('DB_PASSWORD', 'password');
 define('DB_HOST', 'rds-endpoint.rds.amazonaws.com');
 
-# Allow WordPress to use PermaLinks in Apache
+### Allow WordPress to use PermaLinks in Apache
 sudo vim /etc/httpd/conf/httpd.conf
 Locate the <Directory "/var/www/html"> section and change to:
     AllowOverride None > All
 sudo systemctl restart httpd
 
-# Access the website via Public IPV4 address
+### Access the website via Public IPV4 address
 Finish the configuration of the Wordpress
 Customize the site the way that you want with themes, plugins and posts
 
@@ -88,7 +88,7 @@ Create a security group for the load balancer:
   - **Outbound Rules**: All traffic
 Create a target group and put the WordPress instance as a target
 
-# Restricting EC2 Acess to ALB Only:
+### Restricting EC2 Acess to ALB Only:
 Navigate to EC2 -> Security Groups
 Copy the Security Group ID of your ALB
 Edit inbound rules for your EC2 instance's Security Group:
@@ -102,18 +102,18 @@ Edit inbound rules for your EC2 instance's Security Group:
 You can use Amazon Route 53 to manage your domain, or can also use a custom domain managed by a third-party
 In this project the domain **bezuti.cloud** was purchased for Hostinger to use as an example 
 
-# Create New Hosted Zone
+### Create New Hosted Zone
 
-# Configure Domain Provider
+### Configure Domain Provider
 Copy all 4 NS records from Route 53
 Log in to your domain registrar 
 Update nameservers to use AWS nameservers
 
-# Create DNS Records
+### Create DNS Records
 Create a root domain record and choose route traffic to the ALB
 Choose the region where the ALB has been created
 
-# Create WWW redirection record
+### Create WWW redirection record
 Record name: www
 Record type: A - Routes to IPv4 address
 Route traffic to:
@@ -130,7 +130,7 @@ Click "Request certificate"
   - Primary domain: yourdomain.com
   - Additional names: *.yourdomain.com 
 
-# Configure load balancer
+### Configure load balancer
 Navigate to EC2 -> Load Balancers
 Select your ALB -> Click "Add listener"
 - Protocol: HTTPS
@@ -142,7 +142,7 @@ Edit HTTP listener
 - Port: 443
 - Status code: HTTP_301 (permanent redirect)
 
-# WordPress HTTPS Configuration
+### WordPress HTTPS Configuration
 Edit wp-config.php file to force HTTPS
 
 cd /var/www/html/
