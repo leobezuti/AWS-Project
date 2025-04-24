@@ -10,9 +10,9 @@ This project demonstrates a complete WordPress deployment on AWS infrastructure 
 - **Application Load Balancer** for traffic distribution
 - Proper security group configuration
 
-## 🚀 Deployment Steps
+### 🚀 Deployment Steps
 
-### 1. EC2 Instance Setup
+## 1. EC2 Instance Setup
 **Configuration:**
 - **AMI**: Amazon Linux 2
 - **Instance Type**: t2.micro (Free Tier eligible)
@@ -25,7 +25,7 @@ ssh -i "chave.pem" ec2-user@ip-publico-ec2
 
 
 
-### 2. Web Server Installation
+## 2. Web Server Installation
 # Update system and install packages
 sudo yum update -y
 
@@ -40,7 +40,7 @@ sudo systemctl start mariadb
 
 
 
-### 3. RDS Database Configuration
+## 3. RDS Database Configuration
 **Configuration:**
 - **Engine**: MySQL
 - **Instance Type**: db.t3.micro (Free Tier eligible)
@@ -50,7 +50,7 @@ sudo systemctl start mariadb
 
 
 
-### 4. WordPress Installation and Configuration
+## 4. WordPress Installation and Configuration
 wget https://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz
 sudo cp -r wordpress/* /var/www/html/
@@ -81,7 +81,7 @@ Customize the site the way that you want with themes, plugins and posts
 
 ![alt text](image-1.png)
 
-### 5. Application Load Balancer Creation
+## 5. Application Load Balancer Creation
 Create a load balancer and select 3 availability zones
 Create a security group for the load balancer:
   - **Inbound Rules**: HTTP (80), HTTPS (443)
@@ -98,7 +98,7 @@ Edit inbound rules for your EC2 instance's Security Group:
 ![alt text](image.png)
 
 
-### 6. Adding a custom domain
+## 6. Adding a custom domain
 You can use Amazon Route 53 to manage your domain, or can also use a custom domain managed by a third-party
 In this project the domain **bezuti.cloud** was purchased for Hostinger to use as an example 
 
@@ -122,7 +122,7 @@ Route traffic to:
 
 
 
-### 7. SSL/TLS Configuration
+## 7. SSL/TLS Configuration
 Open ACM Console
 Click "Request certificate"
   - Select "Request public certificate"
