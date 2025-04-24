@@ -1,6 +1,6 @@
 # AWS WordPress Deployment with EC2, RDS, and Load Balancer
 
-
+![Architecture Diagram](docs/flowchart.png)
 
 
 # 📋 Project Overview
